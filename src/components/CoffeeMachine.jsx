@@ -7,36 +7,42 @@ const CoffeeMachine = () => {
   "H::" (1 chocolate with no sugar - and therefore no stick)
   "C:2:0" (1 coffee with 2 sugars and a stick)
   */
+  const DRINKS = {
+    Coffee: "C",
+    Chocolate: "H",
+    Tea: "T",
+  };
 
   const [command, setCommand] = useState("");
   const [sugarCount, setSugarCount] = useState(0);
-  const [drinkType, setDrinkType] = useState("");
+  const [drinkType, setDrinkType] = useState({ value: "", code: "" });
+
+  const handleSelectDrink = (drink) => {
+    setDrinkType(() => ({ value: drink, code: DRINKS[drink] }));
+  };
+
+  const handleStart = () => {
+    const numSugar = sugarCount ? sugarCount.toString() : "";
+    const hasStick = sugarCount ? "0" : "";
+    setCommand(`${drinkType.code}:${numSugar}:${hasStick}`);
+  };
 
   return (
     <div>
       <main className="drinks-block">
         <p>This where the user select the type of order</p>
-        <button
-          onClick={() => {
-            setDrinkType("C");
-          }}
-        >
-          Coffee
-        </button>
-        <button
-          onClick={() => {
-            setDrinkType("H");
-          }}
-        >
-          Chocolate
-        </button>
-        <button
-          onClick={() => {
-            setDrinkType("T");
-          }}
-        >
-          Tea
-        </button>
+        {Object.keys(DRINKS).map((drink) => {
+          return (
+            <button
+              key={DRINKS[drink]}
+              onClick={() => {
+                handleSelectDrink(drink);
+              }}
+            >
+              {drink}
+            </button>
+          );
+        })}
       </main>
       <aside className="right-panel">
         <p>This is the right panel</p>
@@ -47,15 +53,7 @@ const CoffeeMachine = () => {
         >
           +
         </button>
-        <button
-          onClick={() => {
-            const numSugar = sugarCount ? sugarCount.toString() : "";
-            const hasStick = sugarCount ? "0" : "";
-            setCommand(`${drinkType}:${numSugar}:${hasStick}`);
-          }}
-        >
-          Start
-        </button>
+        <button onClick={handleStart}>Start</button>
       </aside>
       <footer className="output-message">
         <ShowDrink command={command} />

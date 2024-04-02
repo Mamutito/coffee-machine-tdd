@@ -10,9 +10,9 @@ describe("Drink Orders", () => {
     ["Tea", "T::"],
   ])("Should able to order a '%s'", async (drink, command) => {
     /* 
-    1-User select Coffee
+    1-User select drink
     2-User press Start
-    3-User recive a Coffee
+    3-User recive a drink
     */
     const spy = jest.spyOn(utils, "drinkLogic");
     render(<CoffeeMachine />);
