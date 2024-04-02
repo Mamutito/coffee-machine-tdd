@@ -7,36 +7,57 @@ const CoffeeMachine = () => {
   "H::" (1 chocolate with no sugar - and therefore no stick)
   "C:2:0" (1 coffee with 2 sugars and a stick)
   */
+
   const [command, setCommand] = useState("");
-  const [sugar, setSugar] = useState(false);
+  const [sugarCount, setSugarCount] = useState(0);
+  const [drinkType, setDrinkType] = useState("");
 
   return (
     <div>
       <main className="drinks-block">
         <p>This where the user select the type of order</p>
-        <button>Coffee</button>
+        <button
+          onClick={() => {
+            setDrinkType("C");
+          }}
+        >
+          Coffee
+        </button>
+        <button
+          onClick={() => {
+            setDrinkType("H");
+          }}
+        >
+          Chocolate
+        </button>
+        <button
+          onClick={() => {
+            setDrinkType("T");
+          }}
+        >
+          Tea
+        </button>
       </main>
       <aside className="right-panel">
         <p>This is the right panel</p>
         <button
           onClick={() => {
-            setSugar(true);
+            setSugarCount((count) => count + 1);
           }}
         >
           +
         </button>
         <button
           onClick={() => {
-            const hasSugar = sugar ? "1" : "";
-            const hasStick = sugar ? "0" : "";
-            setCommand(`C:${hasSugar}:${hasStick}`);
+            const numSugar = sugarCount ? sugarCount.toString() : "";
+            const hasStick = sugarCount ? "0" : "";
+            setCommand(`${drinkType}:${numSugar}:${hasStick}`);
           }}
         >
           Start
         </button>
       </aside>
       <footer className="output-message">
-        elcommand{command}
         <ShowDrink command={command} />
         <p>This is where the message of the output is shown</p>
       </footer>
