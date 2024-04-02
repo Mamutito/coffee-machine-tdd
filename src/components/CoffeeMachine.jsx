@@ -8,6 +8,7 @@ const CoffeeMachine = () => {
   "C:2:0" (1 coffee with 2 sugars and a stick)
   */
   const [command, setCommand] = useState("");
+  const [sugar, setSugar] = useState(false);
 
   return (
     <div>
@@ -19,7 +20,16 @@ const CoffeeMachine = () => {
         <p>This is the right panel</p>
         <button
           onClick={() => {
-            setCommand("C::");
+            setSugar(true);
+          }}
+        >
+          +
+        </button>
+        <button
+          onClick={() => {
+            const hasSugar = sugar ? "1" : "";
+            const hasStick = sugar ? "0" : "";
+            setCommand(`C:${hasSugar}:${hasStick}`);
           }}
         >
           Start
