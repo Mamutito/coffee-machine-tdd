@@ -1,6 +1,8 @@
-# React + Vite
+# Coffee Machine Drink React using TDD
 
-This template provides a minimal setup to get React working in Vite with HMR and some ESLint rules.
+We implement a simple exercise of Coffee Machine Drink using TDD pattern.
+
+Source: http://simcap.github.io/coffeemachine/cm-first-iteration.html
 
 Currently, two official plugins are available:
 
